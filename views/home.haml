@@ -1,0 +1,8 @@
+Stats for
+%strong Overall
+=partial(:top_drinks, :locals => {:top_drinks => @overall_stats[:top_drinks]})
+=partial(:top_users, :locals=>{:title => "All Time", :top_users => @overall_stats[:top_users_all_time]})
+=partial(:top_users, :locals=>{:title => "This Year", :top_users => @overall_stats[:top_users_this_year]})
+=partial(:recent_drops, :locals=>{:recent_drops=>@overall_stats[:recent_drops]})
+
+=partial(:user_stats, :locals => {:user_stats => @user_stats})

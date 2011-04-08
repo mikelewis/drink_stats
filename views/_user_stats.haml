@@ -1,0 +1,5 @@
+Stats for
+%strong #{@current_username}
+
+=partial(:top_drinks, :locals => {:top_drinks => user_stats[:top_drinks]})
+=partial(:recent_drops, :locals=>{:recent_drops=>user_stats[:recent_drops]})
