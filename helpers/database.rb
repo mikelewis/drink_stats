@@ -55,7 +55,8 @@ module DrinkStats
     end
 
     def top_spenders
-      query("SELECT username, SUM(ABS(amount)) as row_count FROM money_log WHERE direction='out' GROUP BY username ORDER BY row_count DESC LIMIT 10")
+      exclude_list = ["'longusername'", "'sean'", "'openhouse'", "'yinyang'", "'thunderdome'"]
+      query("SELECT username, SUM(ABS(amount)) as row_count FROM money_log WHERE direction='out' AND username NOT IN (#{exclude_list.join(',')}) GROUP BY username ORDER BY row_count DESC LIMIT 10")
     end
 
     def spent_per_user(username)

@@ -1,0 +1,8 @@
+Stats for 
+%strong #{params[:item]}
+%div
+  Top Users
+  - for item in @item_stats[:top_users]
+    %p
+      =partial(:user, :locals => {:username => item["username"]})
+      \- #{item["row_count"]}

@@ -2,4 +2,5 @@
   %em Top Drinks
   - for item in top_drinks
     %p
-      #{item["slot"]} - #{item["slot_count"]}
+      =partial(:item, :locals => {:slot => item["slot"]})
+      \- #{item["slot_count"]}

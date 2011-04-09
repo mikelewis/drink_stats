@@ -1,1 +1,6 @@
-%p #{drop["username"]} dropped a #{drop["slot"]} from #{drop["machine"]} at #{pretty_date(drop["time"])}
+%p 
+  =partial(:user, :locals => {:username => drop["username"]})
+  dropped a 
+
+  =partial(:item, :locals => {:slot => drop["slot"]})
+  from #{drop["machine"]} at #{pretty_date(drop["time"])}

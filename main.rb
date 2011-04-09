@@ -14,9 +14,14 @@ get '/' do
 end
 
 get '/item/:item' do
-  @item_stats = {
-    :top_users => connection.top_users_per_drink(params[:item])
-  }
+  top_users =  connection.top_users_per_drink(params[:item])
+  
+  @item_stats = case
+                when top_users.to_a.empty?
+                  nil
+                else
+                  {:top_users => top_users }
+                end
   haml :item
 end
 

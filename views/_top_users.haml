@@ -2,5 +2,6 @@
 
 - for item in top_users
   %p
-    #{item["username"]} - #{item["row_count"].to_i}
+    =partial(:user, :locals => {:username => item["username"]})
+    \ - #{item["row_count"].to_i}
 
