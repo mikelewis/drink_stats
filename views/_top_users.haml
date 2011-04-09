@@ -1,6 +1,6 @@
-%strong Top Users #{title}
+%strong Top Users - #{title}
 
 - for item in top_users
   %p
-    #{item["username"]} - #{item["row_count"]}
+    #{item["username"]} - #{item["row_count"].to_i}
 

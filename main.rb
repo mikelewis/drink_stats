@@ -1,32 +1,33 @@
 require 'sinatra'
-require_relative 'helpers'
+require_relative 'helpers/init'
 
 helpers Sinatra::Partials
 before do
-  set :db_connection, DrinkStatHelper::Database.new
+  set :db_connection, DrinkStats::Database.new
   @current_username = "madmike"
 end
 
 get '/' do
-    @overall_stats =
-    {
-      :top_drinks =>connection.get_top_drinks,
-      :top_users_this_year => connection.get_top_ten_users,
-      :top_users_all_time => connection.get_top_ten_users(:all_time => true),
-      :recent_drops => connection.get_recent_drops
-    }
-
-    @user_stats =
-    {
-      :top_drinks =>connection.get_top_drinks(@current_username),
-      :recent_drops => connection.get_recent_drops(@current_username)
-    }
-
+  @overall_stats = connection.get_results_for_overall
+  @user_stats = connection.get_results_for_user(@current_username)
   haml :home
 end
 
+get '/item/:item' do
+  @item_stats = {
+    :top_users => connection.top_users_per_drink(params[:item])
+  }
+  haml :item
+end
+
+get '/machine/:machine' do
+  "MACHINE"
+  haml :machine
+end
+
 get '/:username' do
-  params[:username]
+  @user_stats = connection.get_results_for_user(params[:username])
+  haml :user
 end
 
 not_found do
@@ -34,7 +35,7 @@ not_found do
 end
 
 helpers do
-  include DrinkStatHelper::Helpers
+  include DrinkStats::Helpers
   def connection
     settings.db_connection
   end

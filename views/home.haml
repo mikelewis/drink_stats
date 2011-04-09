@@ -3,6 +3,9 @@ Stats for
 =partial(:top_drinks, :locals => {:top_drinks => @overall_stats[:top_drinks]})
 =partial(:top_users, :locals=>{:title => "All Time", :top_users => @overall_stats[:top_users_all_time]})
 =partial(:top_users, :locals=>{:title => "This Year", :top_users => @overall_stats[:top_users_this_year]})
+=partial(:top_users, :locals=>{:title=> "Spenders", :top_users=> @overall_stats[:top_spenders]})
 =partial(:recent_drops, :locals=>{:recent_drops=>@overall_stats[:recent_drops]})
+=partial(:popular_times, :locals=>{:popular=>@overall_stats[:popular_dates]})
+=partial(:popular_times, :locals=>{:popular=>@overall_stats[:popular_hours]})
 
-=partial(:user_stats, :locals => {:user_stats => @user_stats})
+=partial(:user_stats, :locals => {:username => @current_username, :user_stats => @user_stats})
