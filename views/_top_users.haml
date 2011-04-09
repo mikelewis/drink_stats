@@ -1,3 +1,30 @@
+- label = title.gsub(" ", "-").downcase
+- content_for :javascript do
+  var r = Raphael("top-drinks-#{label}");
+  r.g.txtattr.font = "12px 'Fontin Sans', Fontin-Sans, sans-serif";
+
+  r.g.text(320, 100, "Top Users - #{title}").attr({"font-size": 20});
+
+
+
+  var pie = r.g.piechart(320, 240, 100, #{generate_graph_items(top_users, "row_count", :integer => true)}, {legend: #{generate_graph_items(top_users, "username", :quoted=>true)}, legendpos: "west", href: #{generate_graph_items(top_users, "username", :quoted=>true, :link=>"")}});
+  pie.hover(function () {
+  this.sector.stop();
+  this.sector.scale(1.1, 1.1, this.cx, this.cy);
+  if (this.label) {
+  this.label[0].stop();
+  this.label[0].scale(1.5);
+  this.label[1].attr({"font-weight": 800});
+  }
+  }, function () {
+  this.sector.animate({scale: [1, 1, this.cx, this.cy]}, 500, "bounce");
+  if (this.label) {
+  this.label[0].animate({scale: 1}, 500, "bounce");
+  this.label[1].attr({"font-weight": 400});
+  }
+  });
+
+
 %strong Top Users - #{title}
 
 - for item in top_users
@@ -5,3 +32,5 @@
     =partial(:user, :locals => {:username => item["username"]})
     \ - #{item["row_count"].to_i}
 
+
+%div{:id=>"top-drinks-#{label}"}

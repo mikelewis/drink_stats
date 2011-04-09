@@ -9,7 +9,7 @@ Stats for
     #{username} hasn't dropped any drinks yet... he is probably poor
 - else
   Spent a total of #{user_stats[:spent].first["sum_amount"].to_i} credits
-  =partial(:top_drinks, :locals => {:top_drinks => user_stats[:top_drinks]})
+  =partial(:top_drinks, :locals => {:username => username, :top_drinks => user_stats[:top_drinks]})
   =partial(:recent_drops, :locals=>{:recent_drops=>user_stats[:recent_drops]})
   =partial(:popular_times, :locals=>{:popular=>user_stats[:popular_dates]})
   =partial(:popular_times, :locals=>{:popular=>user_stats[:popular_hours]})
